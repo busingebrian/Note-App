@@ -37,9 +37,12 @@ android {
 
 dependencies {
     val roomVersion = "2.6.1"
-
+    val lifecycleVersion = "2.7.0"
+    //room
     implementation ("androidx.room:room-runtime:$roomVersion")
     annotationProcessor ("androidx.room:room-compiler:$roomVersion")
+    // ViewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
