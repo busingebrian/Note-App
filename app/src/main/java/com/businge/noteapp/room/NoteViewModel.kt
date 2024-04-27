@@ -1,4 +1,4 @@
-package com.businge.noteapp
+package com.businge.noteapp.room
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -8,7 +8,7 @@ import kotlinx.coroutines.launch
 
 class NoteViewModel (application: Application) : AndroidViewModel(application){
      val allNotes: LiveData<MutableList<Note>>
-     val repository:NoteRepository
+     val repository: NoteRepository
 
     // coroutines- this enables the delete, update and add be done on the background thread
     init {

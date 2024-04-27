@@ -1,4 +1,4 @@
-package com.businge.noteapp
+package com.businge.noteapp.room
 
 import androidx.lifecycle.LiveData
 

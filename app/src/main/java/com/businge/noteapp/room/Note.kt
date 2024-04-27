@@ -1,4 +1,4 @@
-package com.businge.noteapp
+package com.businge.noteapp.room
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

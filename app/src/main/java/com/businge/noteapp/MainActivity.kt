@@ -3,6 +3,7 @@ package com.businge.noteapp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
+import com.businge.noteapp.room.NoteViewModel
 
 class MainActivity : AppCompatActivity() {
     private lateinit var noteViewModel: NoteViewModel
