@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" package="com.businge.noteapp.test"
+    xsi:schemaLocation="http://schemas.android.com/apk/res/android ">
+
+    <!-- This manifest file is used to configure instrumentation tests for the Android application. -->
+
+    <!-- Set the target package for the tests -->
+    <instrumentation android:name="androidx.test.runner.AndroidJUnitRunner"
+        android:targetPackage="com.businge.noteapp" />
+
+    <!-- Specify permissions required for the tests -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <!-- Optionally, declare additional permissions if needed for your tests -->
+
+    <!-- Specify the test runner -->
+    <application android:label="NoteAppTest" android:icon="@mipmap/ic_launcher_round">
+
+        <!-- Register the test runner -->
+        <meta-data android:name="android.support.test.runner.AndroidJUnitRunner"
+            android:value="androidx.test.runner.AndroidJUnitRunner" />
+
+        <!-- Define any test-specific resources or configurations here -->
+    </application>
+</manifest>
