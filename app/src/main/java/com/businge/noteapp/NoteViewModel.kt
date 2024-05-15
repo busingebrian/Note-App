@@ -10,7 +10,7 @@ class NoteViewModel (application: Application) : AndroidViewModel(application){
      val allNotes: LiveData<MutableList<Note>>
      val repository:NoteRepository
 
-    // coroutines
+    // coroutines- this enables the delete, update and add be done on the background thread
     init {
         val dao = NoteDatabase.getInstance(application).getNotesDao()
         repository = NoteRepository(dao)
