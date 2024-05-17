@@ -36,6 +36,7 @@ android {
 }
 
 dependencies {
+    implementation("androidx.activity:activity:1.8.0")
     val roomVersion = "2.6.1"
     val lifecycleVersion = "2.8.0"
     //room
