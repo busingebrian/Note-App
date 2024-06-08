@@ -12,7 +12,8 @@ class NoteViewModel (application: Application) : AndroidViewModel(application){
 
     // coroutines- this enables the delete, update and add be done on the background thread
     init {
-        val dao = NoteDatabase.getInstance(application).getNotesDao()
+        val database = NoteDatabase.getInstance(application)
+        val dao = database.getNotesDao()
         repository = NoteRepository(dao)
 
         allNotes = repository.allNotes
