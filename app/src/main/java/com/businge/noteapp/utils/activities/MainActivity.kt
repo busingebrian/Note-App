@@ -17,6 +17,7 @@ import com.businge.noteapp.room.Note
 import com.businge.noteapp.room.NoteViewModel
 import com.businge.noteapp.utils.Constants
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity(), NoteAdaptor.OnClickListener {
     private lateinit var noteViewModel: NoteViewModel
@@ -43,7 +44,7 @@ class MainActivity : AppCompatActivity(), NoteAdaptor.OnClickListener {
 
         noteViewModel.allNotes.observe(this) {
             // here we can add the data to our recycleView
-            notesAdaptor.setNotes(it)
+            notesAdaptor.submitList(it)
         }
 
         getResult =
@@ -54,7 +55,7 @@ class MainActivity : AppCompatActivity(), NoteAdaptor.OnClickListener {
                     val priority = it.data?.getIntExtra(Constants.EXTRA_PRIORITY, -1)
                     val note = Note(title!!, description!!, priority!!)
                     noteViewModel.addNote(note)
-                } else if (it.resultCode == Constants.EDIT_REQUEST_CODE){
+                } else if (it.resultCode == Constants.EDIT_REQUEST_CODE) {
                     val title = it.data?.getStringExtra(Constants.EXTRA_TITLE)
                     val description = it.data?.getStringExtra(Constants.EXTRA_DESCRIPTION)
                     val priority = it.data?.getIntExtra(Constants.EXTRA_PRIORITY, -1)
@@ -84,7 +85,14 @@ class MainActivity : AppCompatActivity(), NoteAdaptor.OnClickListener {
             }
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val removedItem = notesAdaptor.getNoteAt(viewHolder.adapterPosition)
                 noteViewModel.deleteNote(notesAdaptor.getNoteAt(viewHolder.adapterPosition))
+                notesAdaptor.notifyItemRemoved(viewHolder.adapterPosition)
+
+                Snackbar.make(this@MainActivity, recyclerView, "Note Deleted", Snackbar.LENGTH_LONG)
+                    .setAction("Undo") {
+                        noteViewModel.addNote(removedItem)
+                    }.show()
             }
 
         }).attachToRecyclerView(recyclerView)
@@ -110,7 +118,7 @@ class MainActivity : AppCompatActivity(), NoteAdaptor.OnClickListener {
         val priority = note.priority
         val id = note.id
 
-        val intent = Intent(this@MainActivity,AddEditActivity::class.java)
+        val intent = Intent(this@MainActivity, AddEditActivity::class.java)
         intent.putExtra(Constants.EXTRA_TITLE, title)
         intent.putExtra(Constants.EXTRA_DESCRIPTION, description)
         intent.putExtra(Constants.EXTRA_PRIORITY, priority)
