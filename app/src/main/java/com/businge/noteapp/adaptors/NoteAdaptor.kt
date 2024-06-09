@@ -9,7 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.businge.noteapp.R
 import com.businge.noteapp.room.Note
 
-class NoteAdaptor(val onClickListener: OnClickListener) : RecyclerView.Adapter<NoteAdaptor.NoteViewHolder>() {
+class NoteAdaptor(val listener: OnClickListener) :
+    RecyclerView.Adapter<NoteAdaptor.NoteViewHolder>() {
     private var notesList: MutableList<Note> = mutableListOf()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
         return NoteViewHolder(
@@ -34,14 +35,17 @@ class NoteAdaptor(val onClickListener: OnClickListener) : RecyclerView.Adapter<N
     fun getNoteAt(position: Int): Note {
         return notesList[position]
     }
+
     inner class NoteViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val textVieTitle: TextView = view.findViewById(R.id.text_view_title)
         val textViewDescription: TextView = view.findViewById(R.id.text_view_description)
         val textViewPriority: TextView = view.findViewById(R.id.text_view_priority)
+
         init {
             view.setOnClickListener {
-                if (adapterPosition != RecyclerView.NO_POSITION) // check if the position is valid
-                onClickListener.onClickItem(notesList[adapterPosition])
+                if (adapterPosition != RecyclerView.NO_POSITION) {// check if the position is valid
+                    listener.onClickItem(notesList[adapterPosition])
+                }
             }
         }
     }

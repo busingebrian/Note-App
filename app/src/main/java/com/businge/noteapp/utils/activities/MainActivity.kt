@@ -18,7 +18,7 @@ import com.businge.noteapp.room.NoteViewModel
 import com.businge.noteapp.utils.Constants
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), NoteAdaptor.OnClickListener {
     private lateinit var noteViewModel: NoteViewModel
     private lateinit var recyclerView: RecyclerView
     private lateinit var notesAdaptor: NoteAdaptor
@@ -64,7 +64,8 @@ class MainActivity : AppCompatActivity() {
             getResult.launch(intent)
         }
 
-        ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
+        ItemTouchHelper(object :
+            ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
             override fun onMove(
                 recyclerView: RecyclerView,
                 viewHolder: RecyclerView.ViewHolder,
@@ -86,11 +87,26 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
+        when (item.itemId) {
             R.id.delete_all_note_menu -> {
                 noteViewModel.deleteAllNotes()
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onClickItem(note: Note) {
+        val title = note.title
+        val description = note.description
+        val priority = note.priority
+        val id = note.id
+
+        val intent = Intent(this@MainActivity,AddEditActivity::class.java)
+        intent.putExtra(Constants.EXTRA_TITLE, title)
+        intent.putExtra(Constants.EXTRA_DESCRIPTION, description)
+        intent.putExtra(Constants.EXTRA_PRIORITY, priority)
+        intent.putExtra(Constants.EXTRA_ID, id)
+
+        getResult.launch(intent)
     }
 }
