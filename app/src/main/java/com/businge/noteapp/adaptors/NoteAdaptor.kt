@@ -40,4 +40,7 @@ class NoteAdaptor() : RecyclerView.Adapter<NoteAdaptor.NoteViewHolder>() {
         val textViewPriority: TextView = view.findViewById(R.id.text_view_priority)
     }
 
+    interface OnClickListener {
+        fun onClickItem(note: Note)
+    }
 }
