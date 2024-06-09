@@ -38,6 +38,12 @@ class NoteAdaptor(val onClickListener: OnClickListener) : RecyclerView.Adapter<N
         val textVieTitle: TextView = view.findViewById(R.id.text_view_title)
         val textViewDescription: TextView = view.findViewById(R.id.text_view_description)
         val textViewPriority: TextView = view.findViewById(R.id.text_view_priority)
+        init {
+            view.setOnClickListener {
+                if (adapterPosition != RecyclerView.NO_POSITION) // check if the position is valid
+                onClickListener.onClickItem(notesList[adapterPosition])
+            }
+        }
     }
 
     interface OnClickListener {
