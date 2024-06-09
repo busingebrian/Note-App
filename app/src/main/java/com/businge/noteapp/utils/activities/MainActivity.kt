@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         addNoteButton = findViewById(R.id.add_note_button)
 
         recyclerView = findViewById(R.id.recycler_View)
-        notesAdaptor = NoteAdaptor()
+        notesAdaptor = NoteAdaptor(this)
         recyclerView.adapter = notesAdaptor
         recyclerView.layoutManager = LinearLayoutManager(this)
 
