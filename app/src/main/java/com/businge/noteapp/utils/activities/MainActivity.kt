@@ -48,14 +48,23 @@ class MainActivity : AppCompatActivity(), NoteAdaptor.OnClickListener {
 
         getResult =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-                if (it.resultCode == Constants.REQUEST_CODE) {
+                if (it.resultCode == Constants.ADD_REQUEST_CODE) {
+                    val title = it.data?.getStringExtra(Constants.EXTRA_TITLE)
+                    val description = it.data?.getStringExtra(Constants.EXTRA_DESCRIPTION)
+                    val priority = it.data?.getIntExtra(Constants.EXTRA_PRIORITY, -1)
+                    val note = Note(title!!, description!!, priority!!)
+                    noteViewModel.addNote(note)
+                } else if (it.resultCode == Constants.EDIT_REQUEST_CODE){
                     val title = it.data?.getStringExtra(Constants.EXTRA_TITLE)
                     val description = it.data?.getStringExtra(Constants.EXTRA_DESCRIPTION)
                     val priority = it.data?.getIntExtra(Constants.EXTRA_PRIORITY, -1)
 
 
                     val note = Note(title!!, description!!, priority!!)
-                    noteViewModel.addNote(note)
+                    val id = it.data?.getIntExtra(Constants.EXTRA_ID, -1)
+
+                    note.id = id!!
+                    noteViewModel.updateNote(note)
                 }
             }
 
