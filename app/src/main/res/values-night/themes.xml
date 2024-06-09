@@ -11,6 +11,6 @@
     <item name="colorSecondaryVariant">@color/design_default_color_secondary_variant</item>
     <item name="colorOnSecondary">@color/material_dynamic_neutral70</item>
     <!-- Status bar color. -->
-    <item name="android:statusBarColor">@color/design_default_color_secondary</item>
+    <item name="android:statusBarColor">@android:color/holo_blue_dark</item>
 </style>
 </resources>
