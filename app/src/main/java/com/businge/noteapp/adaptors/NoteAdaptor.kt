@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.businge.noteapp.R
 import com.businge.noteapp.room.Note
 
-class NoteAdaptor() : RecyclerView.Adapter<NoteAdaptor.NoteViewHolder>() {
+class NoteAdaptor(val onClickListener: OnClickListener) : RecyclerView.Adapter<NoteAdaptor.NoteViewHolder>() {
     private var notesList: MutableList<Note> = mutableListOf()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
         return NoteViewHolder(
